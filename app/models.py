@@ -4,5 +4,5 @@ from django.db import models
 
 
 class StoreUrl(models.Model):
-    longurl = models.URLField()
-    shorturl = models.URLField()
+    longurl = models.URLField(unique=True)
+    shorturl = models.CharField(unique=True, max_length=120)
