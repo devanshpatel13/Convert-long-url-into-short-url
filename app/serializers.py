@@ -20,6 +20,6 @@ class StoreUrlSerializers(serializers.ModelSerializer):
         obj = StoreUrl.objects.filter(shorturl=value)
         if obj:
             value = "http://127.0.0.1:8000/storeurl/" + ''.join(
-                random.choices(string.ascii_letters + string.digits + string.ascii_uppercase, k=5))
+                random.choices(string.ascii_letters + string.digits + string.ascii_uppercase, k=7))
             self.validate_shorturl(value)
         return value

@@ -67,6 +67,7 @@ class StoreUrlView(generics.ListCreateAPIView):
             serializer.save()
             return Response(serializer.data, status=201)
         except DatabaseError as db_error:
+            # import pdb; pdb.set_trace()
             raise ValidationError({'message': 'Duplicate Long URL.'}) from db_error
         except Exception as e:
             raise e
