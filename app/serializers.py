@@ -18,6 +18,7 @@ class StoreUrlSerializers(serializers.ModelSerializer):
 
     def validate_shorturl(self, value):
         obj = StoreUrl.objects.filter(shorturl=value)
+        # import  pdb; pdb.set_trace()
         if obj:
             value = "http://127.0.0.1:8000/storeurl/" + ''.join(
                 random.choices(string.ascii_letters + string.digits + string.ascii_uppercase, k=7))

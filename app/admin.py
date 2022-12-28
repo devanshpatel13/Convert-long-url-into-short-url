@@ -4,4 +4,4 @@ from .models import *
 
 @admin.register(StoreUrl)
 class StoreUrlAdmin(admin.ModelAdmin):
-    list_display = ['id', 'longurl','shorturl']
+    list_display = ['id', 'longurl', 'shorturl']

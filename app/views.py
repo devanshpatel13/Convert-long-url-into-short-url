@@ -38,39 +38,21 @@ class StoreUrlView(generics.ListCreateAPIView):
 
     def post(self, request, *args, **kwargs):
         payload = request.data
-        # payload['shorturl'] = "http://127.0.0.1:8000/storeurl/testing"
-
-        # payload['shorturl'] = "http://127.0.0.1:8000/storeurl/" + ''.join(
-        #     random.choices(string.ascii_letters + string.digits + string.ascii_uppercase, k=5))
-        # payload['shorturl'] = ''.join(random.choices(string.ascii_letters + string.digits + string.ascii_uppercase, k=5))
-        payload['shorturl'] = "XlPdG12321733"
-        # payload['longurl'] = "http://127.0.0.1:8000/storeurl/" + ''.join(
-        #     random.choices(string.ascii_letters + string.digits + string.ascii_uppercase, k=70))
-        # obj = StoreUrl.objects.filter(shorturl=payload['shorturl'])
-        #
-        # if obj:
-        #     payload['shorturl'] = "http://127.0.0.1:8000/storeurl/aa"
-
-        # payload['shorturl'] = "http://127.0.0.1:8000/storeurl/" + ''.join(
-        #     random.choices(string.ascii_letters + string.digits + string.ascii_uppercase, k=5))
+        payload['shorturl'] = "http://127.0.0.1:8000/storeurl/" + ''.join(
+            random.choices(string.ascii_letters + string.digits + string.ascii_uppercase, k=7))
 
         # import pdb; pdb.set_trace()
-        # for i in range(100000000):
-        #     new = payload['shorturl']
-        #     new1 = payload['longurl']
-        #     new += str(i)
-        #     new1 += str(i)
-        #     pay = {'shorturl': new, 'longurl': new1}
-        try:
-            serializer = self.get_serializer(data=payload, context={'request': request})
-            serializer.is_valid(raise_exception=True)
-            serializer.save()
-            return Response(serializer.data, status=201)
-        except DatabaseError as db_error:
-            # import pdb; pdb.set_trace()
-            raise ValidationError({'message': 'Duplicate Long URL.'}) from db_error
-        except Exception as e:
-            raise e
+
+        # try:
+        serializer = self.get_serializer(data=payload, context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=201)
+        # except DatabaseError as db_error:
+        #     import pdb; pdb.set_trace()
+        #     raise ValidationError({'message': 'Duplicate Long URL.'}) from db_error
+        # except Exception as e:
+        #     raise e
 
 class UrlRedirectView(generics.ListAPIView):
     queryset = StoreUrl.objects.all()
