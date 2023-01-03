@@ -29,6 +29,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django_crontab',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -37,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'app',
-    'corsheaders'
+    'corsheaders',
+
+
 ]
 
 MIDDLEWARE = [
@@ -158,3 +161,41 @@ LOGGING = {
 
 CORS_ORIGIN_ALLOW_ALL = True
 
+REST_FRAMEWORK = {
+    'DATETIME_FORMAT': "%Y-%m-%d %H:%M",
+}
+
+
+CRONJOBS = [
+    ('*/1 * * * *', 'app.cron.print_hello')
+]
+
+
+
+# CELERY SETTINGS
+
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Asia/Kolkata'
+
+CELERY_RESULT_BACKEND = 'django-db'
+
+
+# CELERY BEAT
+
+CELERY_BEAT_SCHEDULAR = 'django_celery_beat.schedulers:DatabaseScheduler'
+
+
+
+
+CELERY_BEAT_SCHEDULE = {
+ 'send-summary-every-minute': {
+       'task': 'app.task.test_func',
+        # There are 4 ways we can handle time, read further
+       'schedule': 60.0,
+
+
+    }
+}

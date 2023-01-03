@@ -8,7 +8,7 @@ from .serializers import *
 from rest_framework import generics
 from django.db import DatabaseError
 from rest_framework.response import Response
-
+import datetime
 # Create your views here.
 logger = logging.getLogger(__name__)
 
@@ -40,19 +40,18 @@ class StoreUrlView(generics.ListCreateAPIView):
         payload = request.data
         payload['shorturl'] = "http://127.0.0.1:8000/storeurl/" + ''.join(
             random.choices(string.ascii_letters + string.digits + string.ascii_uppercase, k=7))
+        payload['created_date'] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-        # import pdb; pdb.set_trace()
-
-        # try:
-        serializer = self.get_serializer(data=payload, context={'request': request})
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data, status=201)
-        # except DatabaseError as db_error:
-        #     import pdb; pdb.set_trace()
-        #     raise ValidationError({'message': 'Duplicate Long URL.'}) from db_error
-        # except Exception as e:
-        #     raise e
+        try:
+            serializer = self.get_serializer(data=payload, context={'request': request})
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            return Response(serializer.data, status=201)
+        except DatabaseError as db_error:
+            import pdb; pdb.set_trace()
+            raise ValidationError({'message': 'Something went to wrong '}) from db_error
+        except Exception as e:
+            raise e
 
 class UrlRedirectView(generics.ListAPIView):
     queryset = StoreUrl.objects.all()

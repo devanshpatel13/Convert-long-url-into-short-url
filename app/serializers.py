@@ -11,10 +11,11 @@ from django.utils import timezone
 class StoreUrlSerializers(serializers.ModelSerializer):
     longurl = serializers.URLField()
     shorturl = serializers.CharField()
+    created_date = serializers.DateTimeField(format="%Y-%m-%d %H:%M")
 
     class Meta:
         model = StoreUrl
-        fields = ['id', 'longurl', 'shorturl']
+        fields = ['id', 'longurl', 'shorturl','created_date']
 
     def validate_shorturl(self, value):
         obj = StoreUrl.objects.filter(shorturl=value)
@@ -24,3 +25,4 @@ class StoreUrlSerializers(serializers.ModelSerializer):
                 random.choices(string.ascii_letters + string.digits + string.ascii_uppercase, k=7))
             self.validate_shorturl(value)
         return value
+
