@@ -10,7 +10,7 @@ app = Celery('shorturl')
 app.conf.enable_utc = False
 
 app.conf.update(timezone='Asia/Kolkata')
-app.config_from_object(settings, namespace='CELERY')
+# app.config_from_object(settings, namespace='CELERY')
 
 
 # Celery Beat Settings
@@ -19,7 +19,7 @@ app.conf.beat_schedule = {
 }
 
 
-app.autodiscover_tasks()
+# app.autodiscover_tasks()
 
 @app.task(bind= True)
 def debug_task(self):
