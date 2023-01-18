@@ -75,7 +75,8 @@ WSGI_APPLICATION = 'shorturl.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
+print(os.getenv(('DATABASE_NAME')))
+print(os.getenv(("DATABASE_PORT")))
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
@@ -85,6 +86,14 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': "ShortUrlData4",
+#         'HOST': '127.0.0.1',
+#         'PORT': 27017,
+#     }
+# }
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
@@ -150,28 +159,3 @@ LOGGING = {
 
 
 CORS_ORIGIN_ALLOW_ALL = True
-
-REST_FRAMEWORK = {
-    'DATETIME_FORMAT': "%Y-%m-%d %H:%M",
-}
-
-
-CRONJOBS = [
-    ('*/1 * * * *', 'app.cron.print_hello')
-]
-
-
-# CELERY SETTINGS
-
-CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
-CELERY_ACCEPT_CONTENT = ['application/json']
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_TIMEZONE = 'Asia/Kolkata'
-
-CELERY_RESULT_BACKEND = 'django-db'
-
-
-# CELERY BEAT
-
-CELERY_BEAT_SCHEDULAR = 'django_celery_beat.schedulers:DatabaseScheduler'

@@ -21,7 +21,7 @@ class StoreUrlSerializers(serializers.ModelSerializer):
         @return:
         """
         if StoreUrl.objects.filter(shorturl=value):
-            value = "http://127.0.0.1:8000/storeurl/" + ''.join(
+            value = "http://127.0.0.1:8000/" + ''.join(
                 random.choices(string.ascii_letters + string.digits + string.ascii_uppercase, k=7))
             self.validate_shorturl(value)
         return value
