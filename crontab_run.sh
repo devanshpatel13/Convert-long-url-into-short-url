@@ -10,7 +10,7 @@ cd /home/plutusdev/Projects/Task/shorturl/
 . env/bin/activate
 
 cd app
-python tests.py
+python data_clean.py
 
 
 echo "Ended here....."

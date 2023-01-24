@@ -46,6 +46,6 @@ $ pip install crontab
 ```
 $ crontab -e
 
-11 12 * * * sh /home/plutusdev/Projects/Task/shorturl/cruntabrun.sh
+11 12 * * * sh /home/plutusdev/Projects/Task/shorturl/crontab_run.sh
 
 ```
