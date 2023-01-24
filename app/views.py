@@ -22,7 +22,6 @@ class StoreUrlView(generics.ListCreateAPIView):
 
     def post(self, request, *args, **kwargs):
         payload = request.data
-        # import pdb; pdb.set_trace()
         payload['shorturl'] = os.getenv('SHORTURL') + ''.join(
             random.choices(string.ascii_letters + string.digits + string.ascii_uppercase, k=7))
         payload['created_date'] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -43,7 +42,7 @@ class UrlRedirectView(generics.ListAPIView):
 
     def get(self, request, *args, **kwargs):
         url = os.getenv('SHORTURL') + kwargs['url']
-        redirect_link_url = StoreUrl.objects.get(shorturl=url)
+        redirect_link_url = StoreUrl.objects.filter(shorturl=url).first()
         if redirect_link_url:
             return redirect(redirect_link_url.longurl)
         else:

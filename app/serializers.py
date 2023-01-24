@@ -2,7 +2,7 @@ import string
 import random
 
 from rest_framework import serializers
-from .models import *
+from .models import StoreUrl
 
 
 class StoreUrlSerializers(serializers.ModelSerializer):
@@ -17,8 +17,9 @@ class StoreUrlSerializers(serializers.ModelSerializer):
     def validate_shorturl(self, value):
         """
 
-        @param value:
-        @return:
+        @param value: shorturl
+        Check the shorturl is already create or not, if it's created then create new
+        @return: shorturl
         """
         if StoreUrl.objects.filter(shorturl=value):
             value = "http://127.0.0.1:8000/" + ''.join(
