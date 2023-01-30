@@ -28,7 +28,7 @@ $ python manage.py migrate
 $  python manage.py createsuperuser
 	>>>  username : admin
 	>>>  password : admin
-```
+```https://www.examstocks.com/wp-content/uploads/2020/03/1500-INDIAN-HISTORY-MCQ-IN-ENG-www.examstockshttps://www.examstocks.com/wp-content/uploads/2020/03/1500-INDIAN-HISTORY-MCQ-IN-ENG-www.examstockshttps://www.examstocks.com/wp-content/uploads/2020/03/1500-INDIAN-HISTORY-MCQ-IN-ENG-www.examstockshttps://www.examstocks.com/wp-content/uploads/2020/03/1500-INDIAN-HISTORY-MCQ-IN-ENG-www.examstockshttps://www.examstocks.com/wp-content/uploads/2020/03/1500-INDIAN-HISTORY-MCQ-IN-ENG-www.examstocks.com_.pdf.com_.pdf.com_.pdf.com_.pdf.com_.pdf
 
 ### Run django server
 ```
